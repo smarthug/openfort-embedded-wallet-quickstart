@@ -17,6 +17,8 @@ const EIP1193MintButton: React.FC<{
   handleSetMessage: (message: string) => void;
 }> = ({ handleSetMessage }) => {
   const { getEvmProvider, state } = useOpenfort();
+  console.log(EmbeddedState)
+  console.log(state)
   const [loading, setLoading] = useState(false);
   const [loadingBatch, setLoadingBatch] = useState(false);
 

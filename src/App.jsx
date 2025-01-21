@@ -6,6 +6,7 @@ import './App.css'
 
 import {OpenfortProvider} from './hooks/useOpenfort';
 import EIP1193MintButton from './components/EIP1193MintButton'
+import GuestLoginButton  from './components/GuestLoginButton'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -38,6 +39,7 @@ function App() {
         <p className="read-the-docs">
           Click on the Vite and React logos to learn more
         </p>
+        <GuestLoginButton />
         <EIP1193MintButton />
       </OpenfortProvider>
     </>

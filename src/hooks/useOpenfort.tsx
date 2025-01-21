@@ -85,6 +85,7 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     const pollEmbeddedState = async () => {
       try {
         const currentState = await openfort.getEmbeddedState();
+        // console.log('Current state:', currentState);
         setState(currentState);
       } catch (err) {
         console.error('Error checking embedded state with Openfort:', err);
@@ -196,16 +197,44 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     []
   );
 
+  // const handleRecovery = useCallback(
+  //   async ({method, password, chainId}:{method: 'password' | 'automatic', password?: string, chainId: number}) => {
+  //     try {
+  //       const shieldAuth: ShieldAuthentication = {
+  //         auth: ShieldAuthType.OPENFORT,
+  //         token: openfort.getAccessToken()!,
+  //         encryptionSession: await getEncryptionSession(),
+  //       };
+  //       if (method === 'automatic') {
+  //         await openfort.configureEmbeddedSigner(chainId, shieldAuth);
+  //       } else if (method === 'password') {
+  //         if (!password || password.length < 4) {
+  //           throw new Error('Password recovery must be at least 4 characters');
+  //         }
+  //         await openfort.configureEmbeddedSigner(chainId, shieldAuth, password);
+  //       }
+  //     } catch (err) {
+  //       console.error('Error handling recovery with Openfort:', err);
+  //       alert(`Error: ${(err as unknown as Error).message}`);
+  //       location.reload();
+  //     }
+  //   },
+  //   []
+  // );
+
+
+
+  
   const handleRecovery = useCallback(
     async ({method, password, chainId}:{method: 'password' | 'automatic', password?: string, chainId: number}) => {
       try {
         const shieldAuth: ShieldAuthentication = {
           auth: ShieldAuthType.OPENFORT,
           token: openfort.getAccessToken()!,
-          encryptionSession: await getEncryptionSession(),
+          // encryptionSession: await getEncryptionSession(),
         };
         if (method === 'automatic') {
-          await openfort.configureEmbeddedSigner(chainId, shieldAuth);
+          // await openfort.configureEmbeddedSigner(chainId, shieldAuth);
         } else if (method === 'password') {
           if (!password || password.length < 4) {
             throw new Error('Password recovery must be at least 4 characters');
