@@ -52,7 +52,8 @@ const EIP1193MintButton: React.FC<{
       transport: custom(provider)
     })
 
-    const erc1155Address = '0x8a7547019537D97EE49Ad32F1a2Dc57B14fbB0E8';
+    const erc1155Address =  import.meta.env.VITE_PUBLIC_ERC1155_ADDRESS as string;
+    console.log('ERC1155 address:', erc1155Address);
 
     const abi = [{
       "inputs": [
