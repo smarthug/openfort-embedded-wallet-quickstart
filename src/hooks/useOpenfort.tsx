@@ -28,25 +28,25 @@ interface ContextType {
     method,
     password,
     chainId
-}:{
-  method: 'password' | 'automatic',
-  chainId:number
-  password?: string,
-}) => Promise<void>;
+  }: {
+    method: 'password' | 'automatic',
+    chainId: number
+    password?: string,
+  }) => Promise<void>;
   setWalletRecovery: (
     recoveryMethod: RecoveryMethod,
     recoveryPassword?: string
-  ) => Promise<{error?: Error}>;
-  exportPrivateKey: () => Promise<{data?: string; error?: Error}>;
+  ) => Promise<{ error?: Error }>;
+  exportPrivateKey: () => Promise<{ data?: string; error?: Error }>;
   signMessage: (
     message: string,
-    options?: {hashMessage: boolean; arrayifyMessage: boolean}
-  ) => Promise<{data?: string; error?: Error}>;
+    options?: { hashMessage: boolean; arrayifyMessage: boolean }
+  ) => Promise<{ data?: string; error?: Error }>;
   signTypedData: (
     domain: TypedDataDomain,
     types: Record<string, Array<TypedDataField>>,
     value: Record<string, any>
-  ) => Promise<{data?: string; error?: Error}>;
+  ) => Promise<{ data?: string; error?: Error }>;
   logout: () => Promise<void>;
   getEOAAddress: () => Promise<string>;
   getBalance: (address: Address, chain: Chain) => Promise<bigint>;
@@ -70,10 +70,10 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   const getEncryptionSession = async (): Promise<string> => {
     try {
-      const response = await axios.post<{session: string}>(
+      const response = await axios.post<{ session: string }>(
         '/api/protected-create-encryption-session',
         {},
-        {headers: {'Content-Type': 'application/json'}}
+        { headers: { 'Content-Type': 'application/json' } }
       );
       return response.data.session;
     } catch (error) {
@@ -113,11 +113,11 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   const signMessage = useCallback(
     async (
       message: string,
-      options?: {hashMessage: boolean; arrayifyMessage: boolean}
-    ): Promise<{data?: string; error?: Error}> => {
+      options?: { hashMessage: boolean; arrayifyMessage: boolean }
+    ): Promise<{ data?: string; error?: Error }> => {
       try {
         const data = await openfort.signMessage(message, options);
-        return {data};
+        return { data };
       } catch (err) {
         console.error('Error signing message:', err);
         return {
@@ -137,7 +137,7 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   }> => {
     try {
       const data = await openfort.exportPrivateKey();
-      return {data};
+      return { data };
     } catch (err) {
       console.error('Error exporting private key:', err);
       return {
@@ -153,7 +153,7 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
     async (
       recoveryMethod: RecoveryMethod,
       recoveryPassword?: string
-    ): Promise<{error?: Error}> => {
+    ): Promise<{ error?: Error }> => {
       try {
         const encryptionSession = await getEncryptionSession();
         await openfort.setEmbeddedRecovery({
@@ -180,10 +180,10 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
       domain: TypedDataDomain,
       types: Record<string, Array<TypedDataField>>,
       value: Record<string, any>
-    ): Promise<{data?: string; error?: Error}> => {
+    ): Promise<{ data?: string; error?: Error }> => {
       try {
         const data = await openfort.signTypedData(domain, types, value);
-        return {data};
+        return { data };
       } catch (err) {
         console.error('Error signing typed data:', err);
         return {
@@ -224,23 +224,20 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
 
 
-  
+
   const handleRecovery = useCallback(
-    async ({method, password, chainId}:{method: 'password' | 'automatic', password?: string, chainId: number}) => {
+    async ({ method, password, chainId }: { method: 'password' | 'automatic', password?: string, chainId: number }) => {
       try {
         const shieldAuth: ShieldAuthentication = {
           auth: ShieldAuthType.OPENFORT,
           token: openfort.getAccessToken()!,
           // encryptionSession: await getEncryptionSession(),
         };
-        if (method === 'automatic') {
-          // await openfort.configureEmbeddedSigner(chainId, shieldAuth);
-        } else if (method === 'password') {
-          if (!password || password.length < 4) {
-            throw new Error('Password recovery must be at least 4 characters');
-          }
-          await openfort.configureEmbeddedSigner(chainId, shieldAuth, password);
+        if (!password || password.length < 4) {
+          throw new Error('Password recovery must be at least 4 characters');
         }
+        await openfort.configureEmbeddedSigner(chainId, shieldAuth, password);
+
       } catch (err) {
         console.error('Error handling recovery with Openfort:', err);
         alert(`Error: ${(err as unknown as Error).message}`);
@@ -262,10 +259,10 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   }, []);
 
   const getEOAAddress = useCallback(async () => {
-    try { 
+    try {
       const account = await openfort.getAccount()
       return (account.ownerAddress as `0x${string}`);
-    } catch (err){
+    } catch (err) {
       console.error('Error obtaining EOA Address with Openfort:', err);
       throw err instanceof Error
         ? err
@@ -280,7 +277,7 @@ export const OpenfortProvider: React.FC<React.PropsWithChildren<unknown>> = ({
         transport: http(),
       });
       return await publicClient.getBalance({ address });
-    } catch (err){
+    } catch (err) {
       console.error('Error obtaining Wallet Balance with Openfort:', err);
       throw err instanceof Error
         ? err

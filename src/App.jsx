@@ -4,12 +4,14 @@ import viteLogo from '/vite.svg'
 import openfortLogo from '/openfort-logo.jpg'
 import './App.css'
 
-import {OpenfortProvider} from './hooks/useOpenfort';
+import { OpenfortProvider } from './hooks/useOpenfort';
 import EIP1193MintButton from './components/EIP1193MintButton'
-import GuestLoginButton  from './components/GuestLoginButton'
+import GuestLoginButton from './components/GuestLoginButton'
+import ShowEmbeddedState from './components/ShowEmbeddedState'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [message, setMessage] = useState('')
 
   return (
     <>
@@ -23,24 +25,21 @@ function App() {
           <a href="https://react.dev" target="_blank">
             <img src={reactLogo} className="logo react" alt="React logo" />
           </a>
-          <a href="https://openfort.xyz" target="_blank">
+          <a href="https://dashboard.openfort.xyz/" target="_blank">
             <img src={openfortLogo} className="logo openfort" alt="Openfort logo" />
           </a>
         </div>
         <h1>Vite + React + Openfort</h1>
         <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
+          <ShowEmbeddedState />
+
         </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
+
         <GuestLoginButton />
-        <EIP1193MintButton />
+        <p>
+          {message}
+        </p>
+        <EIP1193MintButton handleSetMessage={setMessage} />
       </OpenfortProvider>
     </>
   )

@@ -1,7 +1,9 @@
 import openfort from '../utils/openfortConfig';
+import { EmbeddedState } from '@openfort/openfort-js';
 import { useOpenfort } from '../hooks/useOpenfort';
 
 export default function GuestLoginButton() {
+    const { state } = useOpenfort();
     const { handleRecovery } = useOpenfort();
 
 
@@ -25,11 +27,11 @@ export default function GuestLoginButton() {
             //     type: "success",
             //     title: "Successfully signed in",
             //   });
-            //   router.push("/");
             console.log(data)
+            const password = prompt("Please enter your recovery password, Password recovery must be at least 4 characters", "");
             const tmp = {
                 method: "password",
-                password: "test",
+                password: password,
                 chainId: 80002
             }
             handleRecovery(tmp)
@@ -42,8 +44,9 @@ export default function GuestLoginButton() {
 
     return (
         <>
-
-            <button onClick={handleGuest}>Guest Login</button>
+            <button
+                disabled={state === EmbeddedState.READY}
+                onClick={handleGuest}>Guest Login</button>
         </>
     );
 }

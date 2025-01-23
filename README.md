@@ -1,3 +1,19 @@
+
+
+# Openfort Embedded Wallet Quickstart
+
+###  Prerequisite
+1. Access to the Openfort dashboard through whitelisting
+2. Deployed ERC1155 Smart Contract Address
+
+
+## 🚀 Getting started
+Integration is very straightforward. Follow the relevant steps below.
+
+
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
