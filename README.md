@@ -52,6 +52,10 @@ ABI
 ```
 ### 3. Fill the .env
 ```
+cp .env.example .env.local
+```
+
+```
 VITE_PUBLIC_OPENFORT_PUBLIC_KEY=
 VITE_OPENFORT_SECRET_KEY=
 VITE_PUBLIC_SHIELD_API_KEY=
