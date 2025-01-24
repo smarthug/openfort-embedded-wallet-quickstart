@@ -1,7 +1,7 @@
 
 
 # Openfort Embedded Wallet Quickstart
-Minting ERC 1155 NFTs with gas fee sponsorship through guest mode login
+Minting ERC 1155 NFTs with gas fee sponsorship through [guest mode login](https://www.openfort.xyz/docs/guides/javascript/auth/guest)
 ##  🚦Prerequisite
 1. Access to the Openfort dashboard through whitelisting
 2. Deployed ERC1155 Smart Contract Address
