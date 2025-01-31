@@ -2,6 +2,9 @@
 
 # Openfort Embedded Wallet Quickstart
 Minting ERC 1155 NFTs with gas fee sponsorship through [guest mode login](https://www.openfort.xyz/docs/guides/javascript/auth/guest)
+
+* [slide](https://lu.ma/7v3rwtv4?tk=UDLAJf)
+* [video](https://www.youtube.com/watch?v=68EOquzJs6U)
 ##  🚦Prerequisite
 1. Access to the Openfort dashboard through whitelisting
 2. Deployed ERC1155 Smart Contract Address
@@ -17,7 +20,7 @@ npm install
 ```
 
 ### 2. Visit the Openfort Dashboard
-check the [doc](https://www.openfort.xyz/docs/guides/dashboard/sponsor-rules)
+check the [video](https://www.youtube.com/watch?v=68EOquzJs6U)
 
 ABI
 ```
