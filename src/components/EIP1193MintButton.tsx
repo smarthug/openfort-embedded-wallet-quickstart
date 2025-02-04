@@ -33,7 +33,7 @@ const EIP1193MintButton: React.FC<{
       handleSetMessage(`Current account address: ${account}`);
     }
     )
-  }, [])
+  }, [state])
 
 
 
