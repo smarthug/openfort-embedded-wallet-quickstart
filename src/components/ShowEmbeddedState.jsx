@@ -1,11 +1,20 @@
 import { EmbeddedState } from '@openfort/openfort-js';
 import { useOpenfort } from '../hooks/useOpenfort';
+import { useEffect } from 'react';
 
 export default function ShowEmbeddedState() {
 
     const { state } = useOpenfort();
     // console.log(EmbeddedState)
     // console.log(state)
+
+
+    useEffect(() => {
+        if (state === EmbeddedState.READY) {
+            console.log("Ready")
+            // window.location.reload();
+        }
+    }, [state])
 
 
     return (

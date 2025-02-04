@@ -11,10 +11,10 @@ export default function GuestLoginButton() {
 
 
     async function linkEmailPassword() {
-        // const email = prompt("Please enter your email", "");
-        // const password = prompt("Please enter your password", "");
-        const email = "kirklayer@gmail.com"
-        const password = "12345678"
+        const email = prompt("Please enter your email", "");
+        const password = prompt("Please enter your password", "");
+        // const email = "kirklayer@gmail.com"
+        // const password = "12345678"
         const authToken = localStorage.getItem("authToken")
         console.log(authToken)
 
