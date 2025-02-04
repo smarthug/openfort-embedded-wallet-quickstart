@@ -5,8 +5,21 @@ import { useOpenfortStore } from '../utils/openfortStore';
 
 export default function GuestLoginButton() {
     const { state } = useOpenfort();
-    const { handleRecovery } = useOpenfort();
-    const setAuthToken = useOpenfortStore((state) => state.setAuthToken);
+    const authToken = useOpenfortStore((state) => state.authToken);
+
+
+
+
+    async function linkEmailPassword() {
+        // const email = prompt("Please enter your email", "");
+        // const password = prompt("Please enter your password", "");
+        const email = "kirklayer@gmail.com"
+        const password = "12345678"
+        const authToken = localStorage.getItem("authToken")
+        console.log(authToken)
+
+        await openfort.linkEmailPassword({ email, password, authToken });
+    }
 
 
     const handleGuest = async () => {
@@ -30,9 +43,12 @@ export default function GuestLoginButton() {
             //     title: "Successfully signed in",
             //   });
             console.log(data)
-            console.log(data.token)
-            setAuthToken(data.token);
-            localStorage.setItem("authToken", data.token);
+            openfort.storeCredentials({
+                player: data.player.id,
+                accessToken: data.token,
+                refreshToken: data.refreshToken,
+            });
+
             const password = prompt("Please enter your recovery password, Password recovery must be at least 4 characters", "");
             const tmp = {
                 method: "password",
@@ -50,8 +66,8 @@ export default function GuestLoginButton() {
     return (
         <>
             <button
-                disabled={state === EmbeddedState.READY}
-                onClick={handleGuest}>Guest Login</button>
+                disabled={state !== EmbeddedState.READY}
+                onClick={linkEmailPassword}>Link Email Password</button>
         </>
     );
 }

@@ -8,6 +8,7 @@ import { OpenfortProvider } from './hooks/useOpenfort';
 import EIP1193MintButton from './components/EIP1193MintButton'
 import GuestLoginButton from './components/GuestLoginButton'
 import ShowEmbeddedState from './components/ShowEmbeddedState'
+import LinkEmailPasswordButton from './components/LinkEmailPasswordButton'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -34,8 +35,18 @@ function App() {
           <ShowEmbeddedState />
 
         </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '1rem',
+            marginTop: '1rem',
+          }}
+        >
 
-        <GuestLoginButton />
+          <GuestLoginButton />
+          <LinkEmailPasswordButton />
+        </div>
         <p>
           {message}
         </p>
