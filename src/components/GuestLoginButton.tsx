@@ -32,7 +32,7 @@ export default function GuestLoginButton() {
             console.log(data)
             console.log(data.token)
             setAuthToken(data.token);
-            openfort.storeCredentials(data)
+            // openfort.storeCredentials(data)
             // localStorage.setItem("authToken", data.token);
             const password = prompt("Please enter your recovery password, Password recovery must be at least 4 characters", "");
             const tmp = {

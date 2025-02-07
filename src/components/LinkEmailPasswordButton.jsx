@@ -21,7 +21,7 @@ export default function GuestLoginButton() {
         const authToken = openfort.getAccessToken()
         console.log(authToken)
 
-        // await openfort.linkEmailPassword({ email, password, authToken });
+        await openfort.linkEmailPassword({ email, password, authToken });
     }
 
 
